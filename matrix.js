@@ -83,6 +83,7 @@ function selectNumber(button) {
   //Calcular la fila del boton clickeado
   var buttonRow = Math.ceil(button.target.id / 8);
   //Calcular la columna del boton clickeado
+
   var buttonColumn = button.target.id;
   var points;
   //Calcular la columna
@@ -101,6 +102,7 @@ function selectNumber(button) {
     oldX.firstChild.data="--";
     // oldX.target.innerHTML="--";
     
+
     //calcular y actualizar la nueva hilera en donde ira X
     var newRow =  button.target.id;
     while (newRow > 8) {
@@ -146,7 +148,6 @@ function endGame(){
     alert("Empate");
   }
 }
-
 function random(min, max) {
   return (Math.floor(Math.random() * (max - min + 1)) + min);
 }
