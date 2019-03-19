@@ -1,5 +1,6 @@
   //turn false=Player1=vertical __ true=Player2=horizonal
   var turn = false;
+  var gameOver= false;
   //Score
   var player1Score = 0;
   var player2Score = 0;
@@ -73,38 +74,34 @@ function createTable(tableData) {
 
 
 
-// create buttons functions
 
-// funcion mouse sobre el boton
-//ver turno
-//obtener caillas dispinibles
-
-
+//
+//
+//
 function selectNumber(button) {
-  // if (turn==0&&){
-
-  // }
+  console.log(button);
+  //Calcular la fila del boton clickeado
   var buttonRow = Math.ceil(button.target.id / 8);
+  //Calcular la columna del boton clickeado
+
   var buttonColumn = button.target.id;
   var points;
   //Calcular la columna
   while (buttonColumn > 8) {
     buttonColumn -= 8;
   }
-
-  if (turn==0&&xColumn==buttonColumn&&button.target.innerHTML!="--"&&button.target.innerHTML!="X"){
+  //
+  //  PLAYER 1
+  //
+  if (!turn&&xColumn==buttonColumn&&button.target.innerHTML!="--"&&button.target.innerHTML!="X"){
         //transformar boton oprimido en X
     button.target.innerHTML="X";
+    button.target.value = "X";
     //Transformar la vieja X a --
     oldX=document.getElementById(((xRow-1)*8)+xColumn);
-    console.log(oldX);
-    oldX.appendChild(document.createTextNode("--"));
-    oldX.target.innerHTML="--";
-    oldX.value="--";
-
-
-
-
+    oldX.firstChild.data="--";
+    // oldX.target.innerHTML="--";
+    
 
     //calcular y actualizar la nueva hilera en donde ira X
     var newRow =  button.target.id;
@@ -114,37 +111,43 @@ function selectNumber(button) {
     xRow=newRow;
     //Agregar puntos y cambiar de turno
     points = parseInt(button.target.innerHTML);
-    player1Score = player1Score + points;
-
+    player2Score = player2Score + points;
     // ver si existen botones disponibles para el siguente turno, si no entonces fin del juego
+    
+    gameOver= true;
+    for(var i =1;i<9;i++){
+      console.log(matrixButtons[xRow][i].firstChild.data);
+      console.log(xRow,(i));
+      console.log();
+      if (matrixButtons[xRow][i].firstChild.data!="--"&&matrixButtons[xRow][i].firstChild.data!="--"){
+        gameOver= false;
+      } 
+    }
 
-
-
+    if(gameOver){
+      endGame();
+    }
     turn= !turn;
+  
+  //
+  //  PLAYER 2
+  //
+
+
   }
 }
 
-// funcion click
-//obtener el boton
-// Ver turno
-//ver casillas disponibles
-//verificar que esta en la columna/fila de X 
-// verificar que la casilla no ha sido seleccionada anteriormente, que no sea (--)
-//agregar puntos al jugador en turno
-//transformar X en --
-//transformar boton oprimido en X
-// ver si existen botones disponibles para el siguente turno, si no entonces fin del juego
-// ver 
-
-//create table
-
-
-
-//create turns
-
-
-// btn.onclick = sf;
-
+function endGame(){
+  if(player1Score>player2Score){
+    alert("Jugador 1 gana");
+  }
+  if(player1Score<player2Score){
+    alert("Jugador 2 gana");
+  }
+  if(player1Score==player2Score){
+    alert("Empate");
+  }
+}
 function random(min, max) {
   return (Math.floor(Math.random() * (max - min + 1)) + min);
 }
