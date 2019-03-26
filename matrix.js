@@ -1,6 +1,6 @@
 //turn false=Player1=vertical __ true=Player2=horizonal
 var turn = false;
-var gameOver = false;
+var contador = 0;
 //Score
 var player1Score = 0;
 var player2Score = 0;
@@ -79,9 +79,6 @@ function selectNumber(button) {
     //Calcular puntos
     var points = parseInt(button.target.innerHTML);;
 
-    //console.log(button);
-    //console.log("Boton Id: " + button.target.id + " aplanado con clase: " + button.target.class + " con un valor de" + button.target.value)
-
 
     //
     //  PLAYER 1
@@ -97,7 +94,6 @@ function selectNumber(button) {
         oldX = document.getElementById(oldXId);
         oldX.firstChild.data = "--";
         
-        console.log(button);
         oldXId = button.target.id;
 
 
@@ -106,15 +102,17 @@ function selectNumber(button) {
 
 
         // ver si existen botones disponibles para el siguente turno, si no entonces fin del juego
-        gameOver = true;
+        
         for (var i = 0; i < 8; i++) {
-            if (matrixButtons[xRow - 1][i].firstChild.data != "--" && matrixButtons[xRow - 1][i].firstChild.data != "--") {
-                gameOver = false;
+            if (matrixButtons[xRow - 1][i].firstChild.data == "--" || matrixButtons[xRow - 1][i].firstChild.data == "X") {
+                contador ++;
             }
         }
 
-        if (gameOver) {
+        if (contador==8) {
             endGame();
+        } else{
+            contador = 0;
         }
         //cambiar turno
         turn = !turn;
@@ -141,7 +139,6 @@ function selectNumber(button) {
         oldX = document.getElementById(oldXId);
         oldX.firstChild.data = "--";
 
-        console.log(oldX);
 
         oldXId = button.target.id;
 
@@ -154,20 +151,21 @@ function selectNumber(button) {
 
         // ver si existen botones disponibles para el siguente turno, si no entonces fin del juego
 
-        gameOver = true;
+        contdor = 0;
         for (var i = 0; i < 8; i++) {
-            if (matrixButtons[i][xColumn - 1].firstChild.data != "--" && matrixButtons[i][xColumn - 1].firstChild.data != "--") {
-                gameOver = false;
+            if (matrixButtons[i][xColumn - 1].firstChild.data == "--" || matrixButtons[i][xColumn - 1].firstChild.data == "X") {
+                contador++;
             }
         }
 
-        if (gameOver) {
+        if (contador==8) {
             endGame();
+        } else{
+            contador = 0;
         }
         //cambiar turno
         turn = !turn;
     }
-    //console.log(" Columna cambiada a: " + xColumn + " Fila cambiada a: " + xRow);
 }
 
 
