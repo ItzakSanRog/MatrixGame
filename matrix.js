@@ -1,6 +1,11 @@
 var player1ScoreText = document.getElementById("player1score");
 var player2ScoreText = document.getElementById("player2score");
+var start = document.getElementById("start");
+start.addEventListener("click", startGame);
 
+function startGame(){
+    
+}
 //turn false=Player1=vertical __ true=Player2=horizonal
 var turn = false;
 var contador = 0;
@@ -68,7 +73,7 @@ function createTable(tableData) {
         tableBody.appendChild(row);
     });
     table.appendChild(tableBody);
-    document.body.appendChild(table);
+    document.getElementById("game").appendChild(table);
 }
 
 

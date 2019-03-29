@@ -1,30 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Document</title>
 </head>
+
 <body>
     <h1 class="text-center display-3">Matrix Game</h1>
-    <p class="text-center lead">El objetivo de este juego es conseguir la mayor cantidad de puntos posbles</p>
-    <div class="conteiner"></div>
-    <table>
-        <tr>
-            <th class="br-blue">Player 1</th>
-            <th class="bg-red">Player 2</th>
-        </tr>
-        <tr>
-            <td id="player1score" class="br-blue">Score: 0</td>
-            <td id="player2score" class="bg-red">Score: 0</td>
-        </tr>
-    </table>
+    <div class="conteiner">
+        <p class="text-center lead">Matrix es un simple pero entretenido juego para dos jugadores, el objetivo de este
+            juego es conseguir la mayor cantidad de puntos posbles. Se coloca una "X" en una casilla aleatoria, el
+            jugador 1 comienza seleccionando una casilla vertical, el jugador obtendra los puntos que hay dentro de la
+            casilla
+            elegida, despues el jugador 2 tendra que seleccionar una casilla en lina horizontal, asi sucesivamente hasta
+            que
+            algun jugador no tenga casillas quue elegir.</p>
+        <br>
+
+        <input id="start" type="button" value="Start game">
+    </div>
+    <div class="conteiner">
+        <table class="scores">
+            <tr class="scores">
+                <th class="br-blue bg-primary scores">Player 1</th>
+                <th class="bg-red bg-danger scores">Player 2</th>
+            </tr>
+            <tr class="scores">
+                <td id="player1score" class="bg-primary scores">Score: 0</td>
+                <td id="player2score" class="bg-danger scores">Score: 0</td>
+            </tr>
+        </table>
+        <br>
+    </div>
+    <div id="game"></div>
     <br>
-
-
+    <footer class="fixed-bottom bg-dark text-light ">
+        <p class="ml-3 mt-2 lead">By <a href="https://github.com/ItzakSanRog" target="_blank">@EISR</a></p>
+    </footer>
     <script src="matrix.js"></script>
 </body>
+
 </html>
