@@ -208,7 +208,7 @@ function endGame() {
     //AAAAAAAAAAAA
     restart = document.createElement("button");
     nextLine = document.createElement("br");
-    nextLine.setAttribute("id","nextLine");
+    nextLine.setAttribute("id", "nextLine");
     restart.setAttribute("id", "restart");
     restart.setAttribute("class", "restart d-flex justify-content-center");
     var t = document.createTextNode("Jugar de nuevo");
