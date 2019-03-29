@@ -27,7 +27,7 @@ table{
     table-layout: fixed;
 }
 
-#restart{
+.restart{
     margin-left:auto; 
     margin-right:auto;
 }

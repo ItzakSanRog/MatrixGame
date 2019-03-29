@@ -1,26 +1,47 @@
 var player1ScoreText = document.getElementById("player1score");
 var player2ScoreText = document.getElementById("player2score");
-var start = document.getElementById("restart");
-start.addEventListener("click", startGame);
-
-function startGame(){
-    createArrays();
-    start.parentElement.removeChild(start);
-}
+var restart = document.getElementById("restart");
+restart.addEventListener("click", startGame);
+var nextLine;
 //turn false=Player1=vertical __ true=Player2=horizonal
 var turn = false;
-var contador = 0;
+var contador
 //Score
-var player1Score = 0;
-var player2Score = 0;
+var player1Score;
+var player2Score;
 //Arreglos
 var matrixValues = [];
 var matrixButtons = [];
 //Valores de la X
-var xRow = random(1, 8);
-var xColumn = random(1, 8);
+var xRow;
+var xColumn;
+var oldX;
+var oldXId;
+
+
+
+function startGame() {
+    try {
+        document.getElementById("table").parentElement.removeChild(document.getElementById("table"));
+        document.getElementById("nextLine").parentElement.removeChild(document.getElementById("nextLine"));
+    } catch (error) {
+
+    }
+    xRow = random(1, 8);
+    xColumn = random(1, 8);
+    turn = false;
+    player1Score = 0;
+    player2Score = 0;
+    player1ScoreText.innerHTML = "Score: 0";
+    player2ScoreText.innerHTML = "Score: 0";
+    contador = 0;
+    oldXId = ((xRow - 1) * 8) + xColumn;
+    createArrays();
+    restart.parentElement.removeChild(restart);
+}
 
 function createArrays() {
+
     //Create bidimesional array with random values (matrixValues)
     for (var i = 0; i < 8; i++) {
         matrixValues[i] = [];
@@ -45,7 +66,7 @@ function createArrays() {
             matrixButtons[i][j] = document.createElement("button");
             matrixButtons[i][j].setAttribute("value", matrixValues[i][j]);
             matrixButtons[i][j].setAttribute("id", ((i * 8) + (j + 1)));
-            matrixButtons[i][j].setAttribute("class", ("row" + (i + 1) + " column" + (j + 1)+ " button"));
+            matrixButtons[i][j].setAttribute("class", ("row" + (i + 1) + " column" + (j + 1) + " button"));
             matrixButtons[i][j].addEventListener("click", selectNumber);
             //add the text in the button
             text = document.createTextNode(matrixValues[i][j]);
@@ -54,13 +75,13 @@ function createArrays() {
     }
     createTable(matrixButtons);
 }
-var oldX
-var oldXId = ((xRow - 1) * 8) + xColumn;
+
 
 
 
 function createTable(tableData) {
     var table = document.createElement("table");
+    table.setAttribute("id", "table")
     var tableBody = document.createElement("tbody");
     tableData.forEach(rowData => {
         var row = document.createElement("tr");
@@ -74,7 +95,6 @@ function createTable(tableData) {
     table.appendChild(tableBody);
     document.getElementById("game").appendChild(table);
 }
-
 
 function selectNumber(button) {
     //Calcular la fila y columna del boton clickeado
@@ -93,7 +113,7 @@ function selectNumber(button) {
     if (!turn && xColumn == buttonColumn && button.target.innerHTML != "--" && button.target.innerHTML != "X") {
         //Agregar puntos y cambiar de turno
         player1Score = player1Score + points;
-        player1ScoreText.innerHTML = "Score: "+player1Score;
+        player1ScoreText.innerHTML = "Score: " + player1Score;
         //transformar boton oprimido en X
         button.target.innerHTML = "X";
         button.target.value = "X";
@@ -101,7 +121,7 @@ function selectNumber(button) {
         //Transformar la vieja X a --
         oldX = document.getElementById(oldXId);
         oldX.firstChild.data = "--";
-        
+
         oldXId = button.target.id;
 
 
@@ -110,16 +130,16 @@ function selectNumber(button) {
 
 
         // ver si existen botones disponibles para el siguente turno, si no entonces fin del juego
-        
+
         for (var i = 0; i < 8; i++) {
             if (matrixButtons[xRow - 1][i].firstChild.data == "--" || matrixButtons[xRow - 1][i].firstChild.data == "X") {
-                contador ++;
+                contador++;
             }
         }
 
-        if (contador==8) {
+        if (contador == 8) {
             endGame();
-        } else{
+        } else {
             contador = 0;
         }
         //cambiar turno
@@ -134,7 +154,7 @@ function selectNumber(button) {
     if (turn && xRow == buttonRow && button.target.innerHTML != "--" && button.target.innerHTML != "X") {
         //Agregar puntos y cambiar de turno
         player2Score = player2Score + points;
-        player2ScoreText.innerHTML = "Score: "+player2Score;
+        player2ScoreText.innerHTML = "Score: " + player2Score;
         //transformar boton oprimido en X
         button.target.innerHTML = "X";
         button.target.value = "X";
@@ -161,10 +181,10 @@ function selectNumber(button) {
                 contador++;
             }
         }
-        
-        if (contador==8) {
+
+        if (contador == 8) {
             endGame();
-        } else{
+        } else {
             contador = 0;
         }
         //cambiar turno
@@ -186,13 +206,16 @@ function endGame() {
 
 
     //AAAAAAAAAAAA
-    var restart= document.createElement("button");
-    restart = document.createAttribute("id","restart");
-    restart.value="Jugar de nuevo";
+    restart = document.createElement("button");
+    nextLine = document.createElement("br");
+    nextLine.setAttribute("id","nextLine");
+    restart.setAttribute("id", "restart");
+    restart.setAttribute("class", "restart d-flex justify-content-center");
+    var t = document.createTextNode("Jugar de nuevo");
+    restart.appendChild(t);
     restart.addEventListener("click", startGame);
-    console.log(document.getElementById("game"));
-    document.getElementById("game").appendChild(restart);
-    
+    document.getElementById("buttnoDiv").appendChild(restart);
+    document.getElementById("buttnoDiv").appendChild(nextLine);
 }
 
 function random(min, max) {
