@@ -1,10 +1,11 @@
 var player1ScoreText = document.getElementById("player1score");
 var player2ScoreText = document.getElementById("player2score");
-var start = document.getElementById("start");
+var start = document.getElementById("restart");
 start.addEventListener("click", startGame);
 
 function startGame(){
-    
+    createArrays();
+    start.parentElement.removeChild(start);
 }
 //turn false=Player1=vertical __ true=Player2=horizonal
 var turn = false;
@@ -18,8 +19,6 @@ var matrixButtons = [];
 //Valores de la X
 var xRow = random(1, 8);
 var xColumn = random(1, 8);
-
-createArrays();
 
 function createArrays() {
     //Create bidimesional array with random values (matrixValues)
@@ -126,12 +125,7 @@ function selectNumber(button) {
         //cambiar turno
         turn = !turn;
     }
-
-
-
-
     //firstChild.srcElement.data
-
 
     //
     //  PLAYER 2
@@ -189,6 +183,16 @@ function endGame() {
     if (player1Score == player2Score) {
         alert("Empate");
     }
+
+
+    //AAAAAAAAAAAA
+    var restart= document.createElement("button");
+    restart = document.createAttribute("id","restart");
+    restart.value="Jugar de nuevo";
+    restart.addEventListener("click", startGame);
+    console.log(document.getElementById("game"));
+    document.getElementById("game").appendChild(restart);
+    
 }
 
 function random(min, max) {
