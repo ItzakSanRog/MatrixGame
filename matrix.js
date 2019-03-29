@@ -1,3 +1,6 @@
+var player1ScoreText = document.getElementById("player1score");
+var player2ScoreText = document.getElementById("player2score");
+
 //turn false=Player1=vertical __ true=Player2=horizonal
 var turn = false;
 var contador = 0;
@@ -38,7 +41,7 @@ function createArrays() {
             matrixButtons[i][j] = document.createElement("button");
             matrixButtons[i][j].setAttribute("value", matrixValues[i][j]);
             matrixButtons[i][j].setAttribute("id", ((i * 8) + (j + 1)));
-            matrixButtons[i][j].setAttribute("class", ("row" + (i + 1) + " column" + (j + 1)));
+            matrixButtons[i][j].setAttribute("class", ("row" + (i + 1) + " column" + (j + 1)+ " button"));
             matrixButtons[i][j].addEventListener("click", selectNumber);
             //add the text in the button
             text = document.createTextNode(matrixValues[i][j]);
@@ -86,6 +89,7 @@ function selectNumber(button) {
     if (!turn && xColumn == buttonColumn && button.target.innerHTML != "--" && button.target.innerHTML != "X") {
         //Agregar puntos y cambiar de turno
         player1Score = player1Score + points;
+        player1ScoreText.innerHTML = "Score: "+player1Score;
         //transformar boton oprimido en X
         button.target.innerHTML = "X";
         button.target.value = "X";
@@ -131,6 +135,7 @@ function selectNumber(button) {
     if (turn && xRow == buttonRow && button.target.innerHTML != "--" && button.target.innerHTML != "X") {
         //Agregar puntos y cambiar de turno
         player2Score = player2Score + points;
+        player2ScoreText.innerHTML = "Score: "+player2Score;
         //transformar boton oprimido en X
         button.target.innerHTML = "X";
         button.target.value = "X";
@@ -157,7 +162,7 @@ function selectNumber(button) {
                 contador++;
             }
         }
-
+        
         if (contador==8) {
             endGame();
         } else{
