@@ -1,28 +1,33 @@
-#player1score{
-    color: blue;
-}
-
-#player2score{
-    color: red;
-}
-
-body{
-    align-content: center;
-}
 table{
     margin-left:auto; 
     margin-right:auto;
+    border-style: solid;
+    border: 1px solid #3f3f3f;
+}
+
+.scores{
+    border: 1px solid #1d1d1d;
+    border-collapse: collapse;
+    color: rgb(29, 29, 31);
 }
 
 .button{
-    background-color: #555555; /* Green */
+    background-color: #3a3a3a;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
+    border-radius:  2px;
+    table-layout: fixed;
+}
+
+#restart{
+    margin-left:auto; 
+    margin-right:auto;
 }
